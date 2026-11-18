@@ -72,6 +72,7 @@ import * as metrics from './routes/metrics'
 import * as payment from './routes/payment'
 import { placeOrder } from './routes/order'
 import { b2bOrder } from './routes/b2bOrder'
+import { ptaasTestDebug, ptaasTestGreeting, ptaasTestProducts } from './routes/ptaasTest'
 import * as delivery from './routes/delivery'
 import * as recycles from './routes/recycles'
 import * as twoFactorAuth from './routes/2fa'
@@ -639,6 +640,9 @@ function configureApp (app: ReturnType<typeof express>, seq: typeof sequelize) {
   app.get('/rest/user/whoami', utils.asyncHandler(retrieveLoggedInUser()))
   app.get('/rest/user/authentication-details', utils.asyncHandler(authenticatedUsers()))
   app.get('/rest/products/search', utils.asyncHandler(searchProducts()))
+  app.get('/rest/ptaas-test/products', ptaasTestProducts())
+  app.get('/rest/ptaas-test/greeting', ptaasTestGreeting())
+  app.get('/rest/ptaas-test/debug', ptaasTestDebug())
   app.get('/rest/basket/:id', utils.asyncHandler(retrieveBasket()))
   app.post('/rest/basket/:id/checkout', placeOrder())
   app.put('/rest/basket/:id/coupon/:coupon', utils.asyncHandler(applyCoupon()))
